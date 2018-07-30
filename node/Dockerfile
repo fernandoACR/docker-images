@@ -38,6 +38,10 @@ RUN set -ex \
     gpg --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
+#Install Chromium 
+RUN apt-get update && apt-get install -y chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
 RUN buildDeps='xz-utils' \
     && ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
